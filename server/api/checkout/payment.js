@@ -19,7 +19,7 @@ export default defineEventHandler(async(event) => {
                 product_data: {
                   name: item.name,
                 },
-                unit_amount: (item.price), // Assuming 'amount' is the price in the smallest currency unit (e.g., paise for INR)
+                unit_amount: Math.round(item.price * 100), // Assuming 'amount' is the price in the smallest currency unit (e.g., paise for INR)
               },
               quantity: item.quantity, // Assuming there is a 'quantity' field in the item object
             };
