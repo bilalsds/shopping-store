@@ -4,7 +4,7 @@
         <img src="~/assets/AliExpress_Russia.svg" class="w-9 h-9" alt="">
        </h1>
       <div>
-            <input type="text" class="border-0 rounded-lg  ring-white md:w-96 bg-gray-200 w-full focus:outline-none px-6 py-2" placeholder="Search Here...">
+            <!-- <input type="text" v-model="searchInput" @input="changeInputHandler" class="border-0 rounded-lg  ring-white md:w-96 bg-gray-200 w-full focus:outline-none px-6 py-2" placeholder="Search Here..."> -->
         </div>
         <div class=" self-center flex gap-8">
                 <IconsCart @click="navigateTo('/ShoppingCart')" class="text-black hover:text-red-500 cursor-pointer w-8 h-8" />
@@ -22,9 +22,18 @@
 
 <script setup lang="ts">
 
-
-const store = useProductStore();
+const store = useProductStore() as any;
 const {totalCartProductsFilter} = storeToRefs(store)
+const searchInput = useState(() => "") as any;
+
+const changeInputHandler = () => {
+    console.log("Test Search Input : ",toRaw(searchInput.value));
+    // store.productStore.filterProducts(toRaw(searchInput.value))
+    console.log("Test Store Test : ",store.filterProducts);
+    store.filterProducts(toRaw(searchInput.value))
+        
+}
+
 
 </script>
 

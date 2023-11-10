@@ -22,6 +22,14 @@ export const useProductStore = defineStore('product_store',() => {
 
    }
 
+   const filterProducts = (text:any) => {
+   
+    products.value = toRaw(products.value).filter((item:any) => {
+        console.log("Test Filter Product Item : ",item);
+        
+        return item.title.toLowerCase().includes(text.toLowerCase())
+    })
+   }
 
     const productStore = {
         addToCart,
@@ -30,7 +38,8 @@ export const useProductStore = defineStore('product_store',() => {
         getAllProducts,
         products,
         totalCartProductsFilter,
-        totalPrice
+        totalPrice,
+        filterProducts
     }
 
     return productStore

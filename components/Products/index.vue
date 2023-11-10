@@ -3,7 +3,9 @@
         <div class="flex justify-center" v-for="product in products">
             <ProductsCard :products="product" />
         </div>
-       
+       <div class="" v-if="products.length == 0">
+        <h1>No Products Found !!</h1>
+       </div>
     </div>
 </template>
 
