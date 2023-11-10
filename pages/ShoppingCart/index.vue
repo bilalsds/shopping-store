@@ -84,7 +84,7 @@ const {totalCartProductsFilter,totalPrice} = storeToRefs(store);
 const userToken = computed(() => toRaw(user.value));
 // 
 
-console.log("toRaw(user.value)toRaw(user.value) :",toRaw(user.value).user_metadata.name);
+console.log("toRaw(user.value)toRaw(user.value) :",toRaw(user.value));
 
 
 const removeItem = (id:Number) => {
@@ -102,7 +102,7 @@ const checkoutHandler = async () => {
               id: 1,
               quantity: toRaw(totalCartProductsFilter.value).length,
               price: totalPrice,
-              name: toRaw(user.value).user_metadata != undefined ? toRaw(user.value).user_metadata.name : "Test Mode"
+              name: toRaw(user.value) != null  ? toRaw(user.value).user_metadata.name : "Test Mode"
             }
           ]
         },
