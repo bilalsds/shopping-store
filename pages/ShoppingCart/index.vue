@@ -102,7 +102,7 @@ const checkoutHandler = async () => {
               id: 1,
               quantity: toRaw(totalCartProductsFilter.value).length,
               price: totalPrice,
-              name: toRaw(user.value).user_metadata.name != undefined ? toRaw(user.value).user_metadata.name : "Test Mode"
+              name: toRaw(user.value).user_metadata != undefined ? toRaw(user.value).user_metadata.name : "Test Mode"
             }
           ]
         },
