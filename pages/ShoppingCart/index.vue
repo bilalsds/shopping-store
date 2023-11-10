@@ -118,9 +118,9 @@ const checkoutHandler = async () => {
     if(data.value){
         console.log("Test Checkout Response : ",toRaw(data.value));
         sessionStorage.setItem('payment','keep')
-        window.location  = toRaw(data.value).url;
-
-        
+        // window.location  = toRaw(data.value).url;
+        window.open(toRaw(data.value).url, '_blank');
+        sessionStorage.setItem('payment','keep')
     }
     } else {
         alert("Please Add product to cart First !!")
