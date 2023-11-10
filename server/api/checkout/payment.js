@@ -19,19 +19,17 @@ export default defineEventHandler(async(event) => {
                 product_data: {
                   name: item.name,
                 },
-                unit_amount: Math.round(item.price * 100), // Assuming 'amount' is the price in the smallest currency unit (e.g., paise for INR)
+                unit_amount: Math.round(item.price * 100), 
               },
-              quantity: item.quantity, // Assuming there is a 'quantity' field in the item object
+              quantity: item.quantity, 
             };
           }),
-          // Add other necessary Checkout Session parameters like success and cancel URLs
-          success_url: 'https://shopping-store-lake.vercel.app/success', // Replace with your success URL
-          cancel_url: 'https://shopping-store-lake.vercel.app/cancel', // Replace with your cancel URL
+          success_url: 'https://shopping-store-lake.vercel.app/success',
+          cancel_url: 'https://shopping-store-lake.vercel.app/cancel',
         });
     
         return {url:session.url};
       } catch (error) {
-        console.error('Error creating checkout session:', error);
        return { error: error.message };
       }
   

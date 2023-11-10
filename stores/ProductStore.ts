@@ -4,7 +4,6 @@ export const useProductStore = defineStore('product_store',() => {
     let totalCartProducts= useState(() => []) as any;
     let products = useState(() => []) as any;
     const totalCartProductsFilter = computed(() => totalCartProducts.value);
-    // const totalPrice = computed(() => toRaw(totalCartProducts.value).reduce((count:any,item:any) => count+item.price,0 )
     const totalPrice = computed(() => toRaw(totalCartProducts.value).reduce((count:any,item:any) => count + item.price,0))
 
   const addToCart = (Item: any) => {
@@ -25,7 +24,6 @@ export const useProductStore = defineStore('product_store',() => {
    const filterProducts = (text:any) => {
    
     products.value = toRaw(products.value).filter((item:any) => {
-        console.log("Test Filter Product Item : ",item);
         
         return item.title.toLowerCase().includes(text.toLowerCase())
     })
