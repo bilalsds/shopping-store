@@ -15,11 +15,11 @@ export default defineEventHandler(async(event) => {
           line_items: body.items.map(item => {
             return {
               price_data: {
-                currency: 'inr',
+                currency: 'usd',
                 product_data: {
                   name: item.name,
                 },
-                unit_amount: (item.price)*100, // Assuming 'amount' is the price in the smallest currency unit (e.g., paise for INR)
+                unit_amount: (item.price), // Assuming 'amount' is the price in the smallest currency unit (e.g., paise for INR)
               },
               quantity: item.quantity, // Assuming there is a 'quantity' field in the item object
             };
