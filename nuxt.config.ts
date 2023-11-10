@@ -14,9 +14,13 @@ export default defineNuxtConfig({
     
     public:{
       stripekey: process.env.STRIPE_KEY,
+      successUrl:process.env.SUCCESS_URL,
+      failedUrl:process.env.FAILED_URL,
     },
     private:{
-      stripeSecretKey:process.env.STRIPE_SECRET_KEY
+      
+      stripeSecretKey:process.env.STRIPE_SECRET_KEY,
+     
     }
   },
   app:{

@@ -92,7 +92,10 @@ const removeItem = (id:Number) => {
 }
 
 const checkoutHandler = async () => {
-    const token = localStorage.getItem('sb-oqeugynlmzmzthldadxb-auth-token') as any;
+    console.log("Total Price",toRaw(totalPrice.value));
+    
+    if(toRaw(totalPrice.value) != 0){
+        const token = localStorage.getItem('sb-oqeugynlmzmzthldadxb-auth-token') as any;
     const {data,pending} = await useFetch('/api/checkout/payment',{
         method:'POST',
         mode:'cors',
@@ -119,6 +122,10 @@ const checkoutHandler = async () => {
 
         
     }
+    } else {
+        alert("Please Add product to cart First !!")
+    }
+  
 
 }
 

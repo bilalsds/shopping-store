@@ -25,8 +25,8 @@ export default defineEventHandler(async(event) => {
             };
           }),
           // Add other necessary Checkout Session parameters like success and cancel URLs
-          success_url: 'http://localhost:3000/success', // Replace with your success URL
-          cancel_url: 'http://localhost:3000/cancel', // Replace with your cancel URL
+          success_url: useRuntimeConfig().public.successUrl, // Replace with your success URL
+          cancel_url: useRuntimeConfig().public.failedUrl, // Replace with your cancel URL
         });
     
         return {url:session.url};
