@@ -1,6 +1,6 @@
 import Stripe from 'stripe';
 
-const Secret_Key = useRuntimeConfig().private.stripeSecretKey;
+const Secret_Key = 'sk_test_51OAnjUCWjG2lF0aUU7hMgDaeN969SsVdqgJhBIzuqeSmLrvs6CJ4Mfz9U6WhQgFHw1v8TeWTcfi7ZgahFdB4jRZg00dO0RDak8';
 const stripe = Stripe(Secret_Key);
 
 
@@ -25,8 +25,8 @@ export default defineEventHandler(async(event) => {
             };
           }),
           // Add other necessary Checkout Session parameters like success and cancel URLs
-          success_url: useRuntimeConfig().public.successUrl, // Replace with your success URL
-          cancel_url: useRuntimeConfig().public.failedUrl, // Replace with your cancel URL
+          success_url: 'https://shopping-store-lake.vercel.app/success', // Replace with your success URL
+          cancel_url: 'https://shopping-store-lake.vercel.app/cancel', // Replace with your cancel URL
         });
     
         return {url:session.url};
