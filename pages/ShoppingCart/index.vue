@@ -60,7 +60,7 @@
 
             <div class="total flex flex-col items-center py-10 gap-10 bg-white my-8">
                 <div class="totall">
-                    <span class="text-bold text-red-500 text-2xl font-medium">Total Price :  </span> $ {{ toRaw(totalCartProductsFilter.value).reduce((count:any,item:any) => count + item.price,0) }}
+                    <span class="text-bold text-red-500 text-2xl font-medium">Total Price :  </span> $ {{ toRaw(totalCartProductsFilter.value)?.reduce((count:any,item:any) => count + item.price,0) }}
                 </div>
 
               <div class="button">
