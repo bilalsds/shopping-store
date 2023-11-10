@@ -118,8 +118,11 @@ const checkoutHandler = async () => {
     if(data.value){
         console.log("Test Checkout Response : ",toRaw(data.value));
         sessionStorage.setItem('payment','keep')
-        window.location  = toRaw(data.value).url;
 
+        setTimeout(() => {
+        window.location  = toRaw(data.value).url;
+            
+        }, 3000);
         
     }
     } else {
