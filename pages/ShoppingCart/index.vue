@@ -129,8 +129,10 @@ const checkoutHandler = async () => {
 
     if(data.value){
         sessionStorage.setItem('payment','keep');
-        loader.value = false;
+        localStorage.removeItem('product_store');
         window.location  = toRaw(data.value).url;
+        loader.value = false;
+
     }
    
   
