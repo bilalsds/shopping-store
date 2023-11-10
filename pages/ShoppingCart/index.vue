@@ -58,13 +58,17 @@
                 </div>
             </div>
 
-            <div class="total flex flex-col items-center py-10 gap-10 bg-white my-8">
+            <div class="total flex flex-col items-center py-10 gap-10 bg-white my-8" >
                 <div class="totall">
-                    <span class="text-bold text-red-500 text-2xl font-medium">Total Price :  </span> $ {{ toRaw(totalCartProductsFilter.value)?.reduce((count:any,item:any) => count + item.price,0) }}
+                    <span class="text-bold text-red-500 text-2xl font-medium">Total Price :  </span> $ {{ totalCartProductsFilter.reduce((count:any,item:any) => count + item.price,0) }}
                 </div>
 
               <div class="button">
-                <button class="text-white bg-red-500 w-60 rounded-3xl text-bold text-center py-2" @click="checkoutHandler">Checkout</button>
+                <button v-if="!loader" class="text-white bg-red-500 w-60 rounded-3xl text-bold text-center py-2" @click="checkoutHandler">Checkout</button>
+                <button v-if="loader" class="text-white loader w-60 rounded-3xl text-bold text-center py-2" >
+                
+                </button>
+
 
               </div>
                
@@ -79,7 +83,8 @@
 const user = useSupabaseUser() as any;
 
 const store = useProductStore();
-const {totalCartProductsFilter,totalPrice} = storeToRefs(store);
+const {totalCartProductsFilter,totalPrice} = storeToRefs(store) as any;
+const loader = useState(() => false) as any;
 
 const userToken = computed(() => toRaw(user.value));
 // 
@@ -92,9 +97,16 @@ const removeItem = (id:Number) => {
 }
 
 const checkoutHandler = async () => {
+
+    const totoalPrice = toRaw(totalCartProductsFilter.value).reduce((count:any,item:any) => count + item.price,0)
+    if(totoalPrice == 0){
+        alert("Please add product to cart first !!")
+        return
+    }
+
     console.log("Total Price",toRaw(totalPrice.value));
+    loader.value = true;
     
-    if(toRaw(totalPrice.value) != 0){
         const token = localStorage.getItem('sb-oqeugynlmzmzthldadxb-auth-token') as any;
     const {data,pending} = await useFetch('/api/checkout/payment',{
         method:'POST',
@@ -116,18 +128,11 @@ const checkoutHandler = async () => {
     }) as any;;
 
     if(data.value){
-        console.log("Test Checkout Response : ",toRaw(data.value));
-        sessionStorage.setItem('payment','keep')
-
-        setTimeout(() => {
+        sessionStorage.setItem('payment','keep');
+        loader.value = false;
         window.location  = toRaw(data.value).url;
-            
-        }, 3000);
-        
     }
-    } else {
-        alert("Please Add product to cart First !!")
-    }
+   
   
 
 }
@@ -135,5 +140,18 @@ const checkoutHandler = async () => {
 </script>
 
 <style scoped>
+.loader {
+  border: 5px solid #f3f3f3; /* Light grey background */
+  border-top: 5px solid red; /* Red color for the loader */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite; /* Reduced duration for faster spin */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 </style>
