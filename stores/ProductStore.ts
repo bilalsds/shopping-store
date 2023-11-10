@@ -42,4 +42,8 @@ export const useProductStore = defineStore('product_store',() => {
 
     return productStore
 
+},{
+    persist:{
+        storage:persistedState.localStorage
+    }
 })
